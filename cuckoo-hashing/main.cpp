@@ -203,6 +203,22 @@ public:
 		cout << endl;
 	}
 
+	void Remove(string key) {
+		int index = hashFunction1(key);
+		if (T1[index].value == key && T1[index].empty == false)
+		{
+			T1[index].empty = true;
+			return;
+		}
+
+		int index2 = hashFunction2(key);
+		if (T2[index2].value == key && T2[index2].empty == false)
+		{
+			T2[index2].empty = true;
+			return;
+		}
+	}
+
 };
 
 
@@ -218,6 +234,10 @@ int main() {
 "twenty-one", "twenty-two", "twenty-three", "twenty-four", "twenty-five",
 "twenty-six", "twenty-seven", "twenty-eight", "twenty-nine", };
 
+	vector<string> removals = { "twenty-one", "twenty-two", "twenty-three", "twenty-four", "twenty-five",
+	"twenty-six", "twenty-seven", "twenty-eight", "twenty-nine",
+	"aardvark", "Bene Gesserit", "crane", "dog", "element" };
+
 	for (size_t i = 0; i < inputs.size(); i++) {
 		cuckoo.Insert(inputs[i]);
 	}
@@ -230,6 +250,14 @@ int main() {
 	
 	cout << endl;
 	cuckoo.Print();
+
+	for (size_t i = 0; i < removals.size(); i++) {
+		cuckoo.Remove(removals[i]);
+	}
+
+	cout << endl;
+	cuckoo.Print();
+	cout << endl;
 
 	return 0;
 }
